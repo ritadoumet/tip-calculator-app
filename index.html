@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Rita Doumet | Tip calculator app</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Space Mono';
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: rgb(197, 228, 231);
+      color: hsl(183, 100%, 15%);
+      font-family: 'Space Mono';
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    #title {
+      text-align: center;
+      letter-spacing: 4px;
+      margin: 40px;
+      font-size: x-large;
+    }
+
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+
+    #container {
+      display: flex;
+      width: 60%;
+      border-radius: 20px;
+      margin-right: auto;
+      margin-left: auto;
+      background-color: hsl(0, 0%, 100%);
+      font-weight: 700;
+    }
+
+    section {
+      flex-basis: 0;
+      flex-grow: 1;
+      padding: 20px;
+      border-radius: 20px;
+      margin: 20px;
+    }
+
+    .section2 {
+      background-color: hsl(183, 100%, 15%);
+      margin-left: 0;
+      color: white;
+      position: relative;
+    }
+
+    input {
+      background-color: hsl(189, 41%, 97%);
+      border: none;
+      border-radius: 5px;
+      padding: 4px;
+      text-align: right;
+      width: 100%;
+      font-weight: 700;
+      color: hsl(184, 14%, 56%);
+      background-repeat: no-repeat;
+      background-position-x: 5px;
+      background-position-y: 50%;
+      padding: 10px;
+    }
+
+    #bill {
+      background-image: url('images/icon-dollar.svg');
+
+    }
+
+    #people {
+      background-image: url('images/icon-person.svg');
+    }
+
+    input:hover,
+    input:focus,
+    input:focus-visible {
+      outline: rgb(38, 193, 170) auto 1px;
+      cursor: pointer;
+    }
+
+    label {
+      font-weight: 700;
+      font-size: small;
+      color: hsl(186, 14%, 43%);
+    }
+
+    #tips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    button {
+      width: 30%;
+      border: none;
+      margin-bottom: 5px;
+      color: white;
+      font-weight: 700;
+      background-color: hsl(183, 100%, 15%);
+      border-radius: 5px;
+      padding: 10px;
+    }
+    
+    #tips input {
+      flex: 0 1 auto;
+      display: inline;
+      width: 30%;
+      height:40px;
+      padding: 0;
+      background-image: none;
+      color: hsl(183, 100%, 15%);
+    }
+
+    #tips input::placeholder {
+      font-size: 2vh;
+      text-align: center;
+    }
+
+    #tips button:hover {
+      background-color: rgb(159, 232, 223);
+      color: hsl(183, 100%, 15%);
+      cursor: pointer;
+    }
+
+    .exp {
+      color: rgb(39, 191, 170);
+      font-size: small;
+      margin-top: 5px;
+      width: fit-content;
+    }
+
+    .result {
+      margin-bottom: 5px;
+      position: relative;
+    }
+
+    #tipAmount,
+    #total {
+      float: right;
+      color: rgb(39, 191, 170);
+      font-size: xx-large;
+      position: relative;
+      top: 0;
+      transform: translate(0, -20%);
+    }
+
+    #reset {
+      background-color: hsl(184, 14%, 56%);
+      color: #00494d;
+      padding: 10px;
+      text-align: center;
+      border-radius: 5px;
+      position: absolute;
+      cursor: pointer;
+      top: 76%;
+      width: 80%;
+      right: 50%;
+      margin-right: auto;
+      margin-left: auto;
+      transform: translate(50%, 0);
+    }
+
+    #warning {
+      display: none;
+      float: right;
+      position: relative;
+      bottom:-3px;
+      font-size: small;
+      color: rgb(226, 142, 112);
+    }
+
+    /*Hiding the arrows from the input field*/
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    @media only screen and (max-width: 600px) {
+  #container{
+    display: block;
+    width:100%;
+    margin: 0;
+  }
+  .section1, .section2{
+    flex: none;
+    width:100%;
+    display: block;
+    box-sizing: border-box;
+    margin: 0;
+  }
+  #reset{
+    position: relative;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    transform: none;
+    width: calc(100% - 20px);
+  }
+  #tips{
+    width: auto;
+  }
+  #tips button{
+    width: 49%;
+  }
+  #tips input{
+    width:49%;
+  }
+  #tips input::placeholder{
+    font-size: small;
+  }
+  input{
+    width:calc(100% - 20px);
+
+  }
+}
+  </style>
+</head>
+
+<body>
+  <h1 id="title">SPLI<br>TTER</h1>
+  <main id="container">
+    <section class="section1">
+      <form>
+        <p>
+          <label>
+            Bill<br>
+            <input type="number" name="Bill" value=0 min=0 id="bill" onChange="changeOfNumber(this)">
+          </label>
+        </p>
+        <p>
+          <label>Select Tip %</label>
+          <br>
+        <p id="tips">
+          <button type="button" name="tips" value="5">5%</button>
+          <button type="button" name="tips" value="10">10%</button>
+          <button type="button" name="tips" value="15">15%</button>
+          <button type="button" name="tips" value="25">25%</button>
+          <button type="button" name="tips" value="50">50%</button>
+          <input type="number" placeholder="Custom" min=0 onchange="customTip(this.value)">
+        </p>
+        </p>
+        <p><label>
+            <span>Number of People</span>
+            <span id="warning">Can't be zero</span>
+            <br>
+            <input type="number" name="People" value=0 min=0 id="people" onChange="changeOfPeople(this)"
+              onblur="changeOfPeople(this)">
+          </label>
+        </p>
+      </form>
+    </section>
+    <section class="section2">
+      <div>
+        <p class="result">Tip Amount <span id="tipAmount"></span></h5>
+        <p class="exp">/ person</p>
+
+      </div>
+      <div>
+        <p class="result">Total <span id="total"></span></p>
+        <p class="exp">/ person</p>
+
+      </div>
+      <p id="reset" onmouseover="decide(this)" onclick="resetit()" onmouseout="backtonormal(this)">Reset</p>
+    </section>
+  </main>
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="#">Rita Doumet</a>.
+  </div>
+  <script>
+    let percentTips = 0;
+    let bill = 0;
+    let people = 0;
+    let tipsButtons = document.getElementsByTagName("button");
+
+    function decide(elt) {
+      if (percentTips == 0 && bill == 0 && people == 0) {
+        return;
+      }
+      else {
+        elt.style.backgroundColor = "rgb(159, 232, 223)";
+      }
+    }
+    /*
+    
+    
+    document.getElementById("bill").value=0;
+        document.getElementById("people").value=0;
+        for (let i = 0; i<tipsButtons.length;i++){
+        tipsButtons[i].style.backgroundColor="hsl(183, 100%, 15%)";
+        tipsButtons[i].style.color="white";
+      }*/
+    function displayChange() {
+      people = parseInt(people);
+      bill = parseInt(bill);
+      if (people != 0 || percentTips != 0 || bill != 0) {
+        document.getElementById("reset").style.backgroundColor = "hsl(172deg 66% 45%)";
+      }
+      else {
+        document.getElementById("reset").style.backgroundColor = "hsl(184, 14%, 56%)";
+      }
+      if (people != 0) {
+        let tipAmount = bill * percentTips / (100 * people);
+        document.getElementById("tipAmount").innerHTML = '$' + tipAmount.toFixed(2);
+        document.getElementById("total").innerHTML = '$' + (((tipAmount * people) + bill) / people).toFixed(2);
+        console.log(typeof (tipAmount));
+        console.log(typeof (people));
+        console.log(typeof (bill));
+        console.log(typeof (((tipAmount * people) + bill) / people));
+      }
+    }
+    for (let i = 0; i < tipsButtons.length; i++) {
+      tipsButtons[i].addEventListener("click", function () { selectTips(tipsButtons[i]) }, false);
+      console.log(tipsButtons[i].value);
+    }
+
+    function resetit() {
+      document.getElementById("reset").style.backgroundColor = "hsl(184, 14%, 56%)";
+      document.getElementById("bill").value = 0;
+      document.getElementById("people").value = 0;
+      for (let i = 0; i < tipsButtons.length; i++) {
+        tipsButtons[i].style.backgroundColor = "hsl(183, 100%, 15%)";
+        tipsButtons[i].style.color = "white";
+      }
+      people = 0;
+      bill = 0;
+      percentTips = 0;
+      document.getElementById("total").innerHTML = '';
+      document.getElementById("tipAmount").innerHTML = '';
+
+    }
+    function changeOfNumber(elt) {
+      if (elt.value != 0) {
+        elt.style.color = "hsl(183, 100%, 15%)";
+      }
+      else {
+        elt.style.color = "hsl(184, 14%, 56%)";
+      }
+      bill = elt.value;
+      console.log(bill);
+      displayChange();
+    }
+    function changeOfPeople(elt) {
+      elt.style.color = "hsl(183, 100%, 15%)";
+      if (elt.value != 0) {
+        document.getElementById("warning").style.display = "none";
+        elt.style.outline = "none";
+      }
+      else {
+        elt.style.outline = "rgb(226, 142, 112) auto 1px";
+        document.getElementById("warning").style.display = "inline";
+      }
+      people = elt.value;
+      console.log(people);
+      displayChange();
+    }
+    function selectTips(elt) {
+      percentTips = elt.value;
+      elt.style.backgroundColor = "rgb(159, 232, 223)";
+      elt.style.color = "hsl(183, 100%, 15%)";
+      const tipsButtons = document.getElementsByTagName("button");
+      for (let i = 0; i < tipsButtons.length; i++) {
+        if (tipsButtons[i] != elt) {
+          tipsButtons[i].style.backgroundColor = "hsl(183, 100%, 15%)";
+          tipsButtons[i].style.color = "white";
+        }
+      }
+      console.log(percentTips);
+      displayChange();
+    }
+
+    function customTip(num) {
+      percentTips = num;
+      console.log(percentTips);
+      displayChange();
+      const tipsButtons = document.getElementsByTagName("button");
+      for (let i = 0; i < tipsButtons.length; i++) {
+        tipsButtons[i].style.backgroundColor = "hsl(183, 100%, 15%)";
+        tipsButtons[i].style.color = "white";
+      }
+    }
+    function backtonormal(elt) {
+      if (people == 0 && bill == 0 && percentTips == 0) {
+        elt.style.backgroundColor = "hsl(184, 14%, 56%)";
+      }
+      else {
+        elt.style.backgroundColor = "rgb(39, 190, 170)";
+      }
+    }
+
+  </script>
+</body>
+
+</html>
